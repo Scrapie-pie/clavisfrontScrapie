@@ -1,0 +1,100 @@
+//@import url('https://fonts.googleapis.com/css2?family=Open+Sans');
+
+$fs-headers: (
+  h1: 88,
+  h2: 44,
+  h3: 36,
+  h4: 24,
+  h5: 18,
+  h6: 16
+);
+
+$fs-other: (
+  main: 18px,
+  small:    15px,
+  //small:    14px,
+  small-sm: 12px,
+  small-xs: 10px,
+);
+
+%headers {
+  line-height: 1;
+  //font-weight: 800;
+  font-style: normal;
+  margin-bottom: .45em;
+  margin-top: 0;
+  //color: $glob-color-primary;
+
+
+}
+
+@mixin hGradient {
+  background: -webkit-linear-gradient(269deg, #485563 35%, #29323C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  padding-bottom: .25em;
+  margin-bottom: .20em;
+}
+
+@mixin styleFonts {
+
+  h2, .h2 {
+    @include hGradient;
+  }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: map_get($fs-other, main);
+    font-weight: 400;
+    color: $glob-color-primary;
+  }
+
+  p {
+    line-height: 1.25em;
+    margin-bottom: 1.25em;
+    font-size: map_get($fs-other, main);
+    word-wrap: break-word;
+    @media(max-width: 768px) {
+      //font-size: map_get($fs-other, main) * .9;
+    }
+  }
+
+  ul {
+    @include flex_it(column, .25em);
+    line-height: 1.15em;
+    padding-left: 1.5em;
+    margin-bottom: 1.25em;
+  }
+
+  @each $h, $size in $fs-headers {
+    #{$h} {
+      @extend %headers;
+      margin-bottom: 1.25em;
+      padding-bottom: .5em;
+      font-weight: 800;
+      font-size: #{$size}px;
+    }
+
+    .#{$h} {
+      @extend %headers;
+      font-weight: 600;
+      font-size: #{$size}px;
+    }
+    .#{$h}_bold {
+      font-weight: 800;
+    }
+  }
+
+
+  @each $h, $size in $fs-headers {
+    #{$h}, .#{$h} {
+      @media(max-width: 1024px) {
+        font-size: #{$size * .75}px;
+      }
+      //@media(max-width: 768px) {
+      //  font-size: #{$size * .5}px;
+      //}
+    }
+  }
+}
+
